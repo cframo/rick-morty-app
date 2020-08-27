@@ -34,7 +34,7 @@ export default function reducer(state: Idata = initialData, action: Iaction) {
             return {...state, fetching: false, error: action.payload};
 
         case GET_CHARACTERS_SUCCESS:
-            return {...state, fetching: false, data: action.payload.results, pages: action.payload.info.pages};
+            return {...state, fetching: false, data: action.payload.results, pages: action.payload.info.pages, error: null};
 
 
         default:
@@ -97,7 +97,6 @@ export const searchCharacterAction = (key: string, type: boolean) => (dispatch: 
         }
     }).then(({data, error}) => {
         if (error){
-            console.log("HERE");
             dispatch({
                 type: GET_CHARACTERS_ERROR,
                 payload: error.message

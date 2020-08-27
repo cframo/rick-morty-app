@@ -32,7 +32,7 @@ export default function reducer(state: Idata = initialData, action: Iaction) {
         case GET_LOCATIONS_SUCCESS:
             return {...state, fetching: false, data: action.payload.results, pages: action.payload.info.pages };
         case SEARCH_LOCATIONS_SUCCESS:
-            return {...state, fetching: false, data: action.payload.results, pages: action.payload.info.pages};
+            return {...state, fetching: false, data: action.payload.results, pages: action.payload.info.pages, error: null};
 
         default:
             return state;

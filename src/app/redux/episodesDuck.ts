@@ -32,7 +32,7 @@ export default function reducer(state: Idata = initialData, action: Iaction) {
             return {...state, fetching: false, data: action.payload.results, pages: action.payload.info.pages};
 
         case SEARCH_EPISODES_SUCCESS:
-            return {...state, fetching: false, data: action.payload.results, pages: action.payload.info.pages};
+            return {...state, fetching: false, data: action.payload.results, pages: action.payload.info.pages, error: null};
         default:
             return state;
     }
@@ -40,6 +40,7 @@ export default function reducer(state: Idata = initialData, action: Iaction) {
 
 
 export const searchEpisodeAction = (key: string, episode: boolean) => (dispatch: any, getState: any) => {
+    let {nextPage} = getState().episodes;
     let query = gql `
         query($key:String,$page:Int){
             episodes(filter: {name: $key},page:$page) {
@@ -81,8 +82,9 @@ export const searchEpisodeAction = (key: string, episode: boolean) => (dispatch:
             }
         }
         `;
+        nextPage = 1;
     }
-    const {nextPage} = getState().episodes;
+
     dispatch({
         type: GET_EPISODES
     });
