@@ -13,7 +13,8 @@ const initialData: IApp = {
     current: getCurrentPath()
 }
 
-const SET_LOCATION : string = 'SET_LOCATION';
+const SET_LOCATION = 'SET_LOCATION';
+const FIRST_PAGE = 1;
 
 export default function reducer (state: IApp = initialData, action: Iaction) {
 
@@ -32,7 +33,7 @@ export const setLocationAction = (location: string) => (dispatch: any, getState:
         type: SET_LOCATION,
         payload: location
     })
-    pageAction(location, 1)(dispatch,getState)
+    pageAction(location, FIRST_PAGE)(dispatch,getState)
 }
 
 export const pageAction = (type: string, page: number) => (dispatch: any, getState: any) => {

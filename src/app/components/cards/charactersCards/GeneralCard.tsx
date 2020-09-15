@@ -9,17 +9,12 @@ import {
     Col,
     Spinner
 } from "react-bootstrap";
-import {ICharacter} from "../../../../types";
+import {GeneralCardCharactersProps, ICharacter, state} from "../../../../types";
 import DetailCard from "./DetailCard";
 import Error from "../../../pages/Error";
 
-function GeneralCard(props:any) {
+function GeneralCard({characters, loading, error}: GeneralCardCharactersProps) {
 
-    const {
-        characters,
-        loading,
-        error
-    } = props;
     const [show, setShow] = useState(false);
     const emptyCharacter : ICharacter = {
         id: 1,
@@ -31,14 +26,14 @@ function GeneralCard(props:any) {
     }
     const [currentCharacter, setCurrentCharacter] = useState(emptyCharacter);
 
-    const handleShow = (character?: any) : void =>  {
+    const handleShow = (character?: ICharacter) : void =>  {
         setCurrentCharacter(character!);
         setShow(!show);
     }
 
-    const renderModal = () : JSX.Element => {
+    const renderModal = () : JSX.Element | null => {
         if (!show)
-            return <></>;
+            return null;
         return <DetailCard show={show} character={currentCharacter} handleShow={handleShow}/>;
     }
     if (error)
@@ -53,8 +48,7 @@ function GeneralCard(props:any) {
                 </Col>
                 :
                 <>
-                    {characters.map((character: any) => {
-                        return (
+                    {characters.map((character: ICharacter) =>
                             <Fragment key={character.id}>
                                 <Col xs={12}  md={6} lg={4} xl={3} className="mb-4" >
                                     <Card>
@@ -71,8 +65,7 @@ function GeneralCard(props:any) {
                                     </Card>
                                 </Col>
                             </Fragment>
-                        )
-                    })}
+                    )}
                     {renderModal()}
                 </>
             }
@@ -81,7 +74,7 @@ function GeneralCard(props:any) {
 }
 
 
-const mapToState = (state:any) => {
+const mapToState = (state: state) => {
     return{
         characters: state.characters.data,
         loading: state.characters.fetching,

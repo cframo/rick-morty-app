@@ -11,7 +11,7 @@ export default function DetailCard({show, handleShow, character} : DetailCardCha
     return (
         <Modal
             show={show}
-            onHide={handleShow}
+            onHide={() => handleShow}
             backdrop="static"
             keyboard={false}
             centered
@@ -31,7 +31,7 @@ export default function DetailCard({show, handleShow, character} : DetailCardCha
 
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" className="btn-block" onClick={handleShow}>Close</Button>
+                <Button variant="secondary" className="btn-block" onClick={() => handleShow()}>Close</Button>
             </Modal.Footer>
         </Modal>
     );

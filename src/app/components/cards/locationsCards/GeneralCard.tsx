@@ -10,22 +10,17 @@ import {
 } from "react-bootstrap";
 import {connect} from "react-redux";
 import {
+    GeneralCardLocationProps,
     ILocations,
-    IResidents
+    IResidents, state
 } from "../../../../types";
 import DetailCard from "../locationsCards/DetailCard";
 import Error from "../../../pages/Error";
 
 
-function GeneralCard(props: any) {
+function GeneralCard({locations, loading, error}: GeneralCardLocationProps) {
 
-    const {
-        locations,
-        loading,
-        error
-    } = props;
     const [show, setShow] = useState(false);
-
 
     const emptyResidents: IResidents[] = [
         {
@@ -44,7 +39,7 @@ function GeneralCard(props: any) {
 
     //
 
-    const handleShow = (location?: any) : void =>  {
+    const handleShow = (location?: ILocations) : void =>  {
         setCurrentLocation(location!);
         setShow(!show);
     }
@@ -68,18 +63,15 @@ function GeneralCard(props: any) {
                 </Col>
                 :
                 <>
-                    {locations.map( (location:any) => {
-                        return (
+                    {locations.map( (location: ILocations) =>
                             <Fragment key={location.id}>
                                 <Col xs={12} sm={6} md={6} lg={4} xl={3} className="mb-4">
                                     <Card>
-                                        <Card.Img variant="top" src={location.image}/>
                                         <Card.Body>
                                             <Card.Title className="text-center">
                                                 {location.name}
                                                 <h6 className="text-muted mt-1">{location.dimension}</h6>
                                             </Card.Title>
-
                                             <Button variant="primary" className="btn-block" onClick={() => handleShow(location)}>
                                                 See details
                                             </Button>
@@ -87,8 +79,7 @@ function GeneralCard(props: any) {
                                     </Card>
                                 </Col>
                             </Fragment>
-                        )
-                    })}
+                    )}
                     {renderModal()}
                 </>
             }
@@ -96,7 +87,8 @@ function GeneralCard(props: any) {
     );
 };
 
-const mapState = (state: any) => {
+
+const mapState = (state: state) => {
     return {
         locations: state.locations.data,
         loading: state.locations.fetching,

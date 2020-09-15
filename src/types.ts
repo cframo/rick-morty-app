@@ -7,10 +7,28 @@ export interface ICharacter {
     image: string
 }
 
+export type GeneralCardCharactersProps = {
+    characters: ICharacter[];
+    loading: boolean;
+    error?: string;
+}
+
+export type GeneralCardEpisodesProps = {
+    episodes: IEpisodes[];
+    loading: boolean;
+    error?: string;
+}
+
+export type GeneralCardLocationProps = {
+    locations: ILocations[];
+    loading: boolean;
+    error?: string;
+}
+
 export type DetailCardCharacterProps = {
     show: boolean,
     character: ICharacter,
-    handleShow: (event: React.MouseEvent<HTMLButtonElement>) => void,
+    handleShow: (character?: ICharacter) => void,
 }
 
 export interface IResidents {
@@ -29,7 +47,7 @@ export interface ILocations {
 export type DetailCardLocationsProps = {
     show: boolean,
     location: ILocations,
-    handleShow: (event: React.MouseEvent<HTMLButtonElement>) => void,
+    handleShow: (Location?: ILocations) => void,
 }
 
 export interface IEpisodes {
@@ -43,7 +61,11 @@ export interface IEpisodes {
 export type DetaildCardEpisodesProps = {
     show: boolean,
     episode: IEpisodes,
-    handleShow: (event: React.MouseEvent<HTMLButtonElement>) => void,
+    handleShow: (episodes?: IEpisodes) => void,
+}
+
+export type ErrorProps = {
+    message: string;
 }
 
 export interface Idata {
@@ -61,4 +83,35 @@ export interface Iaction {
 
 export interface IApp {
     current: string
+}
+
+export type state = {
+    app: {
+        current: string;
+    };
+    characters : {
+        fetching: boolean;
+        data: ICharacter[],
+        current: object;
+        nextPage: number;
+        pages: number;
+        error?: string;
+    };
+    locations: {
+        fetching: boolean;
+        data: ILocations[],
+        current: object;
+        nextPage: number;
+        pages: number;
+        error?: string;
+    };
+    episodes: {
+        fetching: boolean;
+        data: IEpisodes[],
+        current: object;
+        nextPage: number;
+        pages: number;
+        error?: string;
+    }
+
 }

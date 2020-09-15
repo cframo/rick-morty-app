@@ -1,18 +1,14 @@
 import React from "react";
 import {Button, Col} from "react-bootstrap";
+import {ErrorProps} from "../../types";
 
-export default function Error(props: any) : JSX.Element{
+export default function Error({message}: ErrorProps) : JSX.Element{
 
-    const {
-        message
-    } = props;
-
-    const reload= (): any => {
+    const reload = (): void => {
         window.location.reload(false);
     }
 
     const errorMessage = () => {
-        console.log(message)
         if (message === 'Failed to fetch')
             return "Whoops, check your internet connection.";
         return "Whoops, looks like no coincidences.";

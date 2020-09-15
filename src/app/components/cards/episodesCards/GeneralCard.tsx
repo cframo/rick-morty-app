@@ -4,17 +4,12 @@ import React, {
 } from 'react';
 import {Button, Card, Col, Spinner} from "react-bootstrap";
 import {connect} from "react-redux";
-import {IEpisodes, IResidents} from "../../../../types";
+import {GeneralCardEpisodesProps, IEpisodes, IResidents, state} from "../../../../types";
 import DetailCard from "../episodesCards/DetailCard";
 import Error from "../../../pages/Error";
 
-function GeneralCard(props: any) {
+function GeneralCard({episodes, loading, error}: GeneralCardEpisodesProps) {
 
-    const {
-        episodes,
-        loading,
-        error
-    } = props;
     const [show, setShow] = useState(false);
     const emptyCharacter: IResidents[] = [
         {
@@ -33,14 +28,14 @@ function GeneralCard(props: any) {
 
     //
 
-    const handleShow = (episode?: any) : void =>  {
+    const handleShow = (episode?: IEpisodes) : void =>  {
         setCurrentEpisode(episode!);
         setShow(!show);
     }
 
-    const renderModal = () : JSX.Element => {
+    const renderModal = () : JSX.Element | null => {
         if (!show)
-            return <></>;
+            return null;
         return <DetailCard show={show} episode={currentEpisode} handleShow={handleShow}/>;
     }
 
@@ -57,8 +52,7 @@ function GeneralCard(props: any) {
                 </Col>
                 :
                 <>
-                    {episodes.map((episode: any) => {
-                        return (
+                    {episodes.map((episode: IEpisodes) =>
                             <Fragment key={episode.id}>
                                 <Col xs={12} sm={6} md={6} lg={4} xl={3} className="mb-4">
                                     <Card>
@@ -76,8 +70,7 @@ function GeneralCard(props: any) {
                                     </Card>
                                 </Col>
                             </Fragment>
-                        )
-                    })}
+                    )}
                     {renderModal()}
                 </>
             }
@@ -85,7 +78,7 @@ function GeneralCard(props: any) {
     );
 };
 
-const mapState = (state: any) => {
+const mapState = (state: state) => {
     return {
         episodes: state.episodes.data,
         loading: state.episodes.fetching,

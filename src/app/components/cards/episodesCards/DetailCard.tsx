@@ -11,7 +11,7 @@ export default function DetailCard({show, handleShow, episode} : DetaildCardEpis
     return (
         <Modal
             show={show}
-            onHide={handleShow}
+            onHide={() => handleShow}
             backdrop="static"
             keyboard={false}
             centered
@@ -25,14 +25,14 @@ export default function DetailCard({show, handleShow, episode} : DetaildCardEpis
                         <ListGroup.Item>
                             Characters:
                                 <ListGroup>
-                                    {episode.characters.slice(0, 5).map( character => {
-                                        return <ListGroup.Item>
+                                    {episode.characters.slice(0, 5).map( character =>
+                                        <ListGroup.Item>
                                             {character.name}
                                             <span className="float-right">
                                                 <img src={character.image} width="45em" className="rounded-circle" alt={character.name}/>
                                             </span>
                                         </ListGroup.Item>
-                                    })}
+                                    )}
                                 </ListGroup>
                         </ListGroup.Item>
                     </ListGroup>
@@ -40,7 +40,7 @@ export default function DetailCard({show, handleShow, episode} : DetaildCardEpis
 
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" className="btn-block" onClick={handleShow}>Close</Button>
+                <Button variant="secondary" className="btn-block" onClick={() => handleShow()}>Close</Button>
             </Modal.Footer>
         </Modal>
     );

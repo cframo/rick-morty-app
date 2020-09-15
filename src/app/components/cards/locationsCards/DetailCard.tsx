@@ -11,7 +11,7 @@ export default function DetailCard({show, handleShow, location} : DetailCardLoca
     return (
         <Modal
             show={show}
-            onHide={handleShow}
+            onHide={() => handleShow()}
             backdrop="static"
             keyboard={false}
             centered
@@ -26,14 +26,14 @@ export default function DetailCard({show, handleShow, location} : DetailCardLoca
                             Residents:
                             {location.residents.length > 0 && location.residents[0].name != null ?
                                 <ListGroup>
-                                    {location.residents.slice(0, 5).map( resident => {
-                                        return <ListGroup.Item>
+                                    {location.residents.slice(0, 5).map( resident =>
+                                        <ListGroup.Item>
                                             {resident.name}
                                             <span className="float-right">
                                                 <img src={resident.image} width="45em" className="rounded-circle" alt={resident.name}/>
                                             </span>
                                         </ListGroup.Item>
-                                    })}
+                                    )}
                                 </ListGroup> :
                                 <span className="text-muted"> Whoops, there's no residents in {location.name} :(</span>
                             }
@@ -44,7 +44,7 @@ export default function DetailCard({show, handleShow, location} : DetailCardLoca
 
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" className="btn-block" onClick={handleShow}>Close</Button>
+                <Button variant="secondary" className="btn-block" onClick={() => handleShow()}>Close</Button>
             </Modal.Footer>
         </Modal>
     );
