@@ -86,4 +86,4 @@ const mapState = (state: state) => {
     }
 }
 
-export default connect(mapState, null)(GeneralCard);
+export default connect(mapState)(GeneralCard);
