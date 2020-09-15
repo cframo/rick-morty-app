@@ -33,10 +33,11 @@ export const setLocationAction = (location: string) => (dispatch: any, getState:
         type: SET_LOCATION,
         payload: location
     })
-    pageAction(location, FIRST_PAGE)(dispatch,getState)
+    pageAction(location)(dispatch,getState)
 }
 
-export const pageAction = (type: string, page: number) => (dispatch: any, getState: any) => {
+export const pageAction = (type: string, page?: number) => (dispatch: any, getState: any) => {
+    page = page || FIRST_PAGE;
     switch (type) {
         case "characters":
             upCharPage(page)(dispatch, getState);
