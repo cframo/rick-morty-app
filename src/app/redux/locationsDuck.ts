@@ -49,6 +49,7 @@ export const searchLocationAction = (key: string, type: boolean) => (dispatch: a
                         type, 
                         dimension,
                         residents {
+                          id,
                           name,
                           image
                         }
@@ -70,6 +71,7 @@ export const searchLocationAction = (key: string, type: boolean) => (dispatch: a
                         type, 
                         dimension,
                         residents {
+                          id,
                           name,
                           image
                         }
@@ -132,6 +134,7 @@ export const getLocationsAction = (updatePage? : boolean) => (dispatch: any, get
                   type, 
                   dimension,
                   residents {
+                    id,
                     name,
                     image
                   }

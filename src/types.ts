@@ -1,3 +1,5 @@
+import React from "react";
+
 export interface ICharacter {
     id: number
     name: string,
@@ -7,31 +9,42 @@ export interface ICharacter {
     image: string
 }
 
-export type GeneralCardCharactersProps = {
-    characters: ICharacter[];
+interface IInfo {
     loading: boolean;
     error?: string;
+}
+
+export type GeneralCardProps = {
+    type: string;
+    characters: IInfo;
+    episodes: IInfo;
+    locations: IInfo;
+}
+
+export type GeneralCardCharactersProps = {
+    characters: ICharacter[];
+    show: boolean;
+    setShow: (show: boolean) => void;
 }
 
 export type GeneralCardEpisodesProps = {
     episodes: IEpisodes[];
-    loading: boolean;
-    error?: string;
+    show: boolean;
+    setShow: (show: boolean) => void;
 }
 
 export type GeneralCardLocationProps = {
     locations: ILocations[];
-    loading: boolean;
-    error?: string;
+    show: boolean;
+    setShow: (show: boolean) => void;
 }
 
-export type DetailCardCharacterProps = {
-    show: boolean,
+export type DetailedCharacterProps = {
     character: ICharacter,
-    handleShow: (character?: ICharacter) => void,
 }
 
 export interface IResidents {
+    id: number,
     name: string,
     image?: string
 }
@@ -44,10 +57,8 @@ export interface ILocations {
     residents: IResidents[]
 }
 
-export type DetailCardLocationsProps = {
-    show: boolean,
+export type DetailedLocationProps = {
     location: ILocations,
-    handleShow: (Location?: ILocations) => void,
 }
 
 export interface IEpisodes {
@@ -58,11 +69,19 @@ export interface IEpisodes {
     characters: IResidents[]
 }
 
-export type DetaildCardEpisodesProps = {
-    show: boolean,
+export type DetailedEPisodeProps = {
     episode: IEpisodes,
-    handleShow: (episodes?: IEpisodes) => void,
 }
+
+export type DetailedCardProps = {
+    show: boolean,
+    type: string,
+    episode?: IEpisodes,
+    character?: ICharacter,
+    location?: ILocations,
+    setShow: (show: boolean) => void,
+}
+
 
 export type ErrorProps = {
     message: string;
@@ -83,6 +102,33 @@ export interface Iaction {
 
 export interface IApp {
     current: string
+}
+
+export type NavigationBrandProp = {
+    classname: string;
+}
+
+export interface Style {
+    ButtonGroupFoot: string;
+    classnameDrop: string;
+    dropdownVariant: string;
+    size: 'sm'| 'lg' | undefined;
+    formControlWidth: string
+    buttonGroupHead: string
+}
+
+export type ButtonsBarProps = {
+    leftButtons: boolean;
+    location?: string;
+    setLocationAction?: (location: string) => void;
+    style: Style,
+    type: boolean,
+    searchByType: (type: boolean) => void;
+    searchByWords: (key: React.ChangeEvent<HTMLInputElement>) => void;
+    keySearch: string;
+    validadteString: (value: string) => boolean;
+    clear: () => void;
+
 }
 
 export type state = {

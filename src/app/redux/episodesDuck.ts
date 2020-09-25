@@ -50,6 +50,7 @@ export const searchEpisodeAction = (key: string, episode: boolean) => (dispatch:
                   air_date,
                   episode, 
                   characters {
+                    id,
                     name,
                     image
                   }
@@ -71,6 +72,7 @@ export const searchEpisodeAction = (key: string, episode: boolean) => (dispatch:
                   air_date,
                   episode, 
                   characters {
+                    id,
                     name,
                     image
                   }
@@ -132,6 +134,7 @@ export const getEpisodesAction = (updatePage?: boolean) => (dispatch: any, getSt
                   air_date,
                   episode, 
                   characters {
+                    id,
                     name,
                     image
                   }

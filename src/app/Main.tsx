@@ -1,25 +1,16 @@
 import React from "react";
-import {
-    Card,
-    Row,
-    Container
-} from "react-bootstrap";
-import {
-    Switch,
-    Route,
-} from 'react-router-dom'
+import {Card, Container, Row} from "react-bootstrap";
+import {Route, Switch,} from 'react-router-dom'
 import {connect} from "react-redux";
 
 import Anavbar from "./components/structure/Anavbar";
-import CharactersPage from "./components/cards/charactersCards/GeneralCard";
-import LocationsPage from "./components/cards/locationsCards/GeneralCard";
-import EpisodesPage from "./components/cards/episodesCards/GeneralCard";
+import GeneralCard from "./components/cards/GeneralCard";
 import Pages from "./components/structure/Pages";
 
 function Main(props: any) {
 
     const {location} = props;
-    const date = new Date().getDate() + '/'+ new Date().getMonth() +'/' + new Date().getFullYear();
+    const date = new Date().getDate() + '/' + new Date().getMonth() + '/' + new Date().getFullYear();
 
     return (
         <>
@@ -30,17 +21,17 @@ function Main(props: any) {
 
                 <main className="">
 
-                    <Card className="border-bottom-0" >
+                    <Card className="border-bottom-0">
                         <Card.Header>
                             <h4 className="font-weight-bold">{location}</h4>
                         </Card.Header>
-                        <Card.Body className="d-inline-flex mt-5 overflow-auto" >
+                        <Card.Body className="d-inline-flex mt-5 overflow-auto">
                             <Container>
                                 <Row>
                                     <Switch>
-                                        <Route exact path="/" component={CharactersPage}/>
-                                        <Route exact path="/locations" component={LocationsPage}/>
-                                        <Route exact path="/episodes" component={EpisodesPage}/>
+                                        <Route exact path="/" render={() => <GeneralCard type={'Characters'}/>} />
+                                        <Route exact path="/locations" render={() => <GeneralCard type={'Locations'}/>} />
+                                        <Route exact path="/episodes" render={() => <GeneralCard type={'Episodes'}/>} />
                                     </Switch>
 
                                 </Row>
@@ -71,8 +62,8 @@ function Main(props: any) {
     )
 }
 
-const mapToState = (state:any) => {
-    return{
+const mapToState = (state: any) => {
+    return {
         location: state.app.current
     }
 }

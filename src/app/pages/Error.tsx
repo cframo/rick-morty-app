@@ -1,4 +1,4 @@
-import React from "react";
+import React, {MouseEventHandler} from "react";
 import {Button, Col} from "react-bootstrap";
 import {ErrorProps} from "../../types";
 
@@ -22,7 +22,7 @@ export default function Error({message}: ErrorProps) : JSX.Element{
                 </h5>
                 <h6>:(</h6>
                 <hr/>
-                <Button variant={"outline-info"} onClick={() => reload()}>
+                <Button variant={"outline-info"} onClick={reload as unknown as MouseEventHandler}>
                     Try again!
                 </Button>
             </div>
